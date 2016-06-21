@@ -15,9 +15,8 @@ define([
     var rt = Listmap.create({
         websocketURL: websocketURL,
         channel: "b87dff2e9a465f0e0ae36453d19b087c",
-        cryptKey:"sksyaHv+OOlQumRmZrQU4f5N",
         data:{},
-        crypto: Crypto
+        crypto: Crypto.createEncryptor("sksyaHv+OOlQumRmZrQU4f5N"),
     });
 
     var $userList = $('#visitors');
@@ -33,7 +32,7 @@ define([
         console.log('ready!');
 
         // now that the object is ready, listen for further changes
-        proxy.on('change', ['guestBook'], function (oldValue, newvalue, path) {
+        proxy.on('change', ['guestBook'], function (oldValue, newValue, path) {
             console.log("A new user (%s) signed the guestbook", newValue);
             render(proxy.guestBook);
         }).on('disconnect', function () {
